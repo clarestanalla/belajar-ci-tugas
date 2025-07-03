@@ -79,11 +79,24 @@ Proyek menggunakan struktur MVC CodeIgniter 4:
   - AuthController.php - Autentikasi pengguna
   - ProdukController.php - Manajemen produk
   - TransaksiController.php - Proses transaksi
-- app/Models - Model untuk interaksi database
+  - DiscountController.php - Diskon
+- app/Models 
   - ProductModel.php - Model produk
+  - ProductCategoryModel.php - Model kategori produk
   - UserModel.php - Model pengguna
-- app/Views - Template dan komponen UI
+  - TransactionModel.php - Model transaksi produk
+  - TransactionDetailModel.php - Model detail transaksi produk
+  - DiscountModel.php - Model diskon produk
+- app/Views 
+  - v_login - Tampilan awal login
+  - v_checkout - Tampilan saat checkout
+  - v_contact - Tampilan contact 
+  - v_discount - Tampilan discount
+  - v_home - Tampilan awal setelah login
   - v_produk.php - Tampilan produk
   - v_keranjang.php - Halaman keranjang
+  - v_produkkategori - Tampilan kategori produk
+  - v_produkPDF - Tampilan saat data di download menjadi pdf
+  - v_profile - Tampilan profile
 - public/img - Gambar produk dan aset
 - public/NiceAdmin - Template admin

@@ -6,15 +6,18 @@ use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 
 use App\Models\UserModel; 
+use App\Models\DiscountModel; 
 
 class AuthController extends BaseController
 {
     protected $user; 
+    protected $discount;
     
     function __construct()
     {
         helper('form');
         $this->user=new UserModel(); 
+        $this->discount= new DiscountModel(); 
     }
 
     public function login()
@@ -39,7 +42,24 @@ class AuthController extends BaseController
                         'isLoggedIn' => TRUE
                     ]);
 
+                    $discountModel = new DiscountModel();
+                    $today = date('Y-m-d');
+                    $diskon = $discountModel->where('tanggal', $today)->first();
+
+                    $sessionData = [
+                            'id' => $dataUser['id'], 
+                            'username' => $dataUser['username'],
+                            'role' => $dataUser['role'],
+                            'isLoggedIn' => TRUE,
+                            'nominal_diskon' => null 
+                        ];
+
+                    if ($diskon) {
+                        session()->set('discount_nominal', $diskon['nominal']);
+                    }
+
                     return redirect()->to(base_url('/'));
+
                 } else {
                     session()->setFlashdata('failed', 'Kombinasi Username & Password Salah');
                     return redirect()->back();
@@ -56,6 +76,7 @@ class AuthController extends BaseController
 
     return view('v_login');
 }
+
 
 public function logout()
     {
